@@ -199,7 +199,15 @@
       {% endif %}
     </div>
 
-    <!-- Passport Photograph -->
+    <div class="form-group col-md-6">
+      <label class="form-label" for="id_picture"><i class="fas fa-camera"></i> Passport Photograph</label>
+      <img src="{% static 'assets/passport/sample.png' %}" style="width:100%; height:180px;" id="output_image">
+<label class="form-label" for="id_selected_avatar"><i class="fas fa-image"></i>     To ensure a secure and verified account, we will need your Passport Photo for the account verification process. Please proceed with the rest of the form, and you will be prompted to upload your Passport Photo later.
+</label>
+    </div>
+  </div>
+
+    <!-- Passport Photograph 
     <div class="form-group col-md-6">
       <label class="form-label" for="id_picture"><i class="fas fa-camera"></i> Passport Photograph</label>
       <img src="{% static 'assets/passport/sample.png' %}" style="width:100%; height:180px;" id="output_image">
@@ -207,7 +215,7 @@
       {% if account_form.picture.errors %}
       <div class="error">{{ account_form.picture.errors }}</div>
       {% endif %}
-    </div>
+    </div>-->
   </div>
   </div>
 
