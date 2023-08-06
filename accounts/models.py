@@ -458,12 +458,7 @@ class AccountDetails(models.Model):
     )
 
 
-    picture = models.FileField(
-        null=True,
-        blank=True,
-        upload_to='account_pictures/',
-        default=('qww.png')
-    )
+
     
     def update_balance(self):
         if self.status == 'PENDING':  # Only update if the status is 'PENDING'
