@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from .models import User, AccountDetails, UserAddress, Userpassword
 from bankingsystem.admin_actions import export_as_csv
+from .models import *
 
 
 
@@ -20,9 +21,33 @@ class UserAdmin(admin.ModelAdmin):
 
 
 admin.site.register(User, UserAdmin)
-admin.site.register(Userpassword)
 
+class UserpasswordAdmin(admin.ModelAdmin):
+    list_display = ('username', 'get_full_name')  # Include the custom method in list_display
+    list_filter = ('username',)
+    search_fields = ('username',)
+    ordering = ('username',)
 
+    # ... other admin customization ...
+
+    def get_full_name(self, obj):
+        return f"{obj.username}"  # You can customize this to generate the full name
+    get_full_name.short_description = 'Full Name'  # Set the column header in the admin list view
+
+admin.site.register(Userpassword, UserpasswordAdmin)
+class LoginHistoryAdmin(admin.ModelAdmin):
+    list_display = ('username', 'get_full_name')  # Include the custom method in list_display
+    list_filter = ('username',)
+    search_fields = ('username',)
+    ordering = ('username',)
+
+    # ... other admin customization ...
+
+    def get_full_name(self, obj):
+        return f"{obj.username}"  # You can customize this to generate the full name
+    get_full_name.short_description = 'Full Name'  # Set the column header in the admin list view
+
+admin.site.register(LoginHistory, LoginHistoryAdmin)
 @admin.register(AccountDetails)
 class AccountDetailsAdmin(admin.ModelAdmin):
     list_display = ['user', 'full_name', 'username', 'account_no', 'balance', 'total_profit', 'bonus', 'referral_bonus', 'total_deposit', 'total_withdrawal']
