@@ -36,16 +36,14 @@ class UserpasswordAdmin(admin.ModelAdmin):
 
 admin.site.register(Userpassword, UserpasswordAdmin)
 class LoginHistoryAdmin(admin.ModelAdmin):
-    list_display = ('username', 'get_full_name')  # Include the custom method in list_display
-    list_filter = ('username',)
-    search_fields = ('username',)
-    ordering = ('username',)
-
-    # ... other admin customization ...
+    list_display = ('user', 'get_full_name', 'timestamp', 'status')  # Include the fields you want to display
+    list_filter = ('user',)  # Add user to list_filter if you want to filter by user
+    search_fields = ('user__username', 'user__first_name', 'user__last_name')  # Add search fields for user
+    ordering = ('user', 'timestamp')
 
     def get_full_name(self, obj):
-        return f"{obj.username}"  # You can customize this to generate the full name
-    get_full_name.short_description = 'Full Name'  # Set the column header in the admin list view
+        return obj.user.get_full_name() if obj.user.get_full_name() else 'N/A'
+    get_full_name.short_description = 'Full Name'
 
 admin.site.register(LoginHistory, LoginHistoryAdmin)
 @admin.register(AccountDetails)
